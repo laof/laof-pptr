@@ -1,22 +1,21 @@
-import chrome from 'chrome-aws-lambda'
-import puppeteer from 'puppeteer-core'
+const chrome = require('chrome-aws-lambda')
+const puppeteer = require('puppeteer-core')
 
-export default async function handler(request, response) {
-  var data = await screenshot()
-  response.status(200).send(`Hello 333! ${JSON.stringify(data)}`)
+module.exports = async function handler(request, response) {
+  var data = await xxx()
+  response.status(200).send(`Hedllo 333! ${JSON.stringify(data)}`)
 }
 
-export async function screenshot() {
-  const options = {
+async function xxx() {
+  const browser = await puppeteer.launch({
     args: chrome.args,
     executablePath: await chrome.executablePath,
     headless: chrome.headless,
-  }
-  const browser = await puppeteer.launch(options)
+  })
+
   const page = await browser.newPage()
   await page.goto('https://www.baidu.com')
 
-  // Get the "viewport" of the page, as reported by the page.
   const dimensions = await page.evaluate(() => {
     return {
       baseURI: document.baseURI,
