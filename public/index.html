@@ -7,8 +7,13 @@
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <title>laof-pptr</title>
     <style>
-      body {
-        background: #e9e9e9;
+      .logo {
+        display: flex;
+        height: 150px;
+        user-select: none;
+        padding-bottom: 30px;
+        justify-content: center;
+        align-items: center;
       }
       .main {
         margin: auto;
@@ -23,35 +28,31 @@
       }
       button {
         padding: 12px 32px;
+        flex: 1;
       }
       .btn {
         display: flex;
       }
       .view {
         text-align: left;
-        display: flex;
-        align-items: center;
-        padding: 53px 0px;
+        margin-top: 60px;
       }
     </style>
   </head>
   <body>
     <div class="main">
-      <h1>favicon</h1>
-      <div style="height: 150px;">
+      <div class="logo">
         <img src="favicon.png" alt="" />
+        <span style="font-size: 60px;">Get favicon</span>
       </div>
       <div class="btn">
-        <input
-          type="text"
-          value="https://zhuanlan.zhihu.com"
-          id="txt"
-        />
+        <input type="text" value="https://zhuanlan.zhihu.com" id="txt" />
         <button onclick="get()">start</button>
       </div>
+
       <div class="view">
+        <p id="url"></p>
         <img id="icon" alt="" />
-        <span id="url"></span>
       </div>
     </div>
     <script>
