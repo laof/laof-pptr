@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <title>laof-pptr</title>
+    <style>
+      body {
+        background: #e9e9e9;
+      }
+      .main {
+        margin: auto;
+        max-width: 800px;
+        padding: 80px 50px;
+        background: white;
+        text-align: center;
+      }
+      input {
+        width: 80%;
+        padding: 12px;
+      }
+      button {
+        padding: 12px 32px;
+      }
+      .btn {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1>favicon</h1>
+      <div style="height: 150px">
+        <img src="favicon.png" alt="" />
+      </div>
+      <div class="btn">
+        <input type="text" value="https://www.baidu.com" id="txt" /><button onclick="get()">start</button>
+      </div>
+    </div>
+    <script>
+      function get() {
+        var txt = document.getElementById("txt").value;
+        fetch("api/ico?url=" + btoa(txt))
+          .then((res) => res.text())
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    </script>
+  </body>
+</html>

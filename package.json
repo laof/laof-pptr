@@ -1,10 +1,9 @@
 {
+  "name": "laof-pptr",
   "private": true,
-  "scripts": {
-    "build": "AWS_LAMBDA_FUNCTION_NAME=true node run.js"
-  },
+  "scripts": {},
   "dependencies": {
     "chrome-aws-lambda": "8.0.2",
-    "puppeteer-core": "8.0.0"
+    "puppeteer": "^8.0.0"
   }
 }
