@@ -1,30 +1,26 @@
-const chrome = require("chrome-aws-lambda");
-const puppeteer = require("puppeteer-core");
-// const _browser = require("../browser.js");
+const chrome = require('chrome-aws-lambda')
+const puppeteer = require('puppeteer-core')
+const _browser = require('../browser.js')
+
+function atob(str) {
+  var buffer = Buffer.from(str, 'base64')
+  return buffer.toString()
+}
 
 module.exports = async function handler(request, response) {
-  var data = await xxx();
-  response.status(200).send(`Hedllo 333! ${JSON.stringify(data)}`);
-};
+  const domain = url.parse(request.url, true).query.url
+  const data = xxx(atob(domain))
 
-async function xxx() {
+  response.writeHead(200, { 'Content-type': 'application/json' })
+  response.end(JSON.stringify(data))
+}
+
+async function xxx(url) {
   const browser = await puppeteer.launch({
     args: chrome.args,
     executablePath: await chrome.executablePath,
     headless: chrome.headless,
-  });
+  })
 
-  const page = await browser.newPage();
-  await page.goto("https://www.baidu.com");
-
-  const dimensions = await page.evaluate(() => {
-    return {
-      baseURI: document.baseURI,
-      title: document.title,
-    };
-  });
-
-  await browser.close();
-
-  return dimensions;
+  return _browser(browser, url)
 }

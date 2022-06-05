@@ -27,26 +27,62 @@
       .btn {
         display: flex;
       }
+      .view {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        padding: 53px 0px;
+      }
     </style>
   </head>
   <body>
     <div class="main">
       <h1>favicon</h1>
-      <div style="height: 150px">
+      <div style="height: 150px;">
         <img src="favicon.png" alt="" />
       </div>
       <div class="btn">
-        <input type="text" value="https://www.baidu.com" id="txt" /><button onclick="get()">start</button>
+        <input
+          type="text"
+          value="https://flutterchina.club/get-started/install"
+          id="txt"
+        />
+        <button onclick="get()">start</button>
+      </div>
+      <div class="view">
+        <img id="icon" alt="" />
+        <span id="url"></span>
       </div>
     </div>
     <script>
       function get() {
-        var txt = document.getElementById("txt").value;
-        fetch("api/ico?url=" + btoa(txt))
-          .then((res) => res.text())
+        var txt = document.getElementById('txt').value
+
+        if (!txt.startsWith('http')) {
+          setres(false, '', 'error ' + txt)
+          return
+        }
+
+        setres(true, '', 'loading...')
+
+        fetch('api/ico?url=' + btoa(txt))
+          .then((res) => res.json())
           .then((res) => {
-            console.log(res);
-          });
+            if (res && res.code == 200) {
+              setres(false, res.url, res.url)
+            } else {
+              setres(false, '', txt + ' get favicon failed')
+            }
+          })
+          .catch((res) => {
+            setres(false, '', txt + ' get favicon failed')
+          })
+      }
+
+      function setres(bo, icon, url) {
+        document.querySelector('button').disabled = bo
+        document.getElementById('icon').src = icon
+        document.getElementById('url').innerHTML = url
       }
     </script>
   </body>
