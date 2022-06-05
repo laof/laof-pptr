@@ -1,6 +1,6 @@
 const chrome = require("chrome-aws-lambda");
 const puppeteer = require("puppeteer-core");
-const _browser = require("../browser.js");
+// const _browser = require("../browser.js");
 
 module.exports = async function handler(request, response) {
   var data = await xxx();
