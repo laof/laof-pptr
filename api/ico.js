@@ -1,5 +1,6 @@
 const chrome = require('chrome-aws-lambda')
 const puppeteer = require('puppeteer-core')
+var url = require('url')
 const _browser = require('../browser.js')
 
 function atob(str) {
@@ -9,7 +10,7 @@ function atob(str) {
 
 module.exports = async function handler(request, response) {
   const domain = url.parse(request.url, true).query.url
-  const data = xxx(atob(domain))
+  const data = await xxx(atob(domain))
 
   response.writeHead(200, { 'Content-type': 'application/json' })
   response.end(JSON.stringify(data))

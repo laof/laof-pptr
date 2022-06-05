@@ -1,4 +1,3 @@
-
 const path = require('path')
 
 module.exports = async function (browser, url) {
@@ -56,6 +55,6 @@ function link(href, base) {
     return href
   }
 
-  var aa = path.join(base, href)
-  return aa
+  // var aa = path.join(base, href)
+  return base + href
 }
