@@ -22,7 +22,7 @@ module.exports = async function (browser, url) {
 
     await browser.close()
     
-    return { code: 200, url: base + 'favicon.ico' }
+    return { code: 200, url: getss(data.list, data.base) }
   } catch (e) {
     return { code: 500, url: '', error: JSON.stringify(e) }
   }
@@ -35,7 +35,7 @@ function getss(list, base) {
       return s
     }
   }
-  return 'base + 'favicon.ico'
+  return base + 'favicon.ico'
 }
 
 function anyHref(href, base) {
